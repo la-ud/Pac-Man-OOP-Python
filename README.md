@@ -1,42 +1,270 @@
-🟡 Pac-Man OOP Python Edition v3
-Sebuah clone game klasik Pac-Man yang dibangun murni menggunakan Python dan Pygame.
-Proyek ini bukan sekadar game biasa, melainkan sebuah implementasi arsitektur perangkat
-lunak yang menonjolkan prinsip Object-Oriented Programming (OOP), Design Patterns, dan
-Procedural Audio.
-Game ini menggunakan sistem pergerakan Tile-Locked Interpolation untuk memastikan
-gerakan entitas 100% presisi dan tersinkronisasi dengan grid, menghilangkan bug collision
-yang sering terjadi pada pergerakan berbasis float.
-✨ Fitur Utama
-● Tile-Locked Movement: Gerakan Pac-Man dan Hantu dikunci ke dalam grid (sumber ke
-tujuan) menggunakan interpolasi progresif. Anti-nyangkut dan anti-tembus dinding!
-● Individual Ghost AI: Keempat hantu memiliki sifat klasik aslinya. Blinky mengejar
-langsung, Pinky memotong jalan, Inky menyergap, dan Clyde menjaga jarak.
-● Procedural Chiptune SFX: Tidak memerlukan file audio eksternal (.wav/.mp3). Seluruh
-efek suara (waka-waka, sirene, makan dot) di-sintesis secara prosedural langsung dari
-kode!
-● Retro Visuals: Dilengkapi dengan scanlines overlay, partikel visual saat memakan
-hantu/dot, dan efek animasi smooth.
-️ Implementasi OOP & Arsitektur
-1. Class & Object: Struktur dasar untuk memisahkan logika GameEngine, Renderer, dan
-Entity.
-2. Inheritance & Polimorfisme: Pemisahan behavior AI hantu menggunakan subclassing
-(Ghost -> Blinky, Pinky, Inky, Clyde) melalui override metode pencarian target.
-3. Abstract Base Class (ABC): Penggunaan antarmuka abstrak pada kelas Entity dan
-EventObserver.
-4. Class Attribute & Decorator: Penggunaan @property untuk kalkulasi posisi piksel
-dinamis dan Singleton config.
-5. Design Patterns: Menggunakan Singleton untuk manajemen konfigurasi game
-(GameConfig) dan Observer Pattern (EventBus) untuk sistem scoring yang decoupled.
-🚀 Cara Menjalankan
+# 🟡 PAC-MAN OOP Edition v3
 
-Pastikan kamu sudah menginstal Python dan Pygame di komputermu.
-1. Clone repositori ini.
-2. Instal dependensi:
+A retro-style Pac-Man game built with **Python** and **Pygame**, designed to demonstrate advanced **Object-Oriented Programming (OOP)** concepts while maintaining classic arcade gameplay.
+
+![Python](https://img.shields.io/badge/Python-3.10+-blue)
+![Pygame](https://img.shields.io/badge/Pygame-2.x-green)
+![OOP](https://img.shields.io/badge/OOP-Advanced-orange)
+
+---
+
+## 🎮 Preview
+
+> Add your gameplay screenshot here
+
+```text
+assets/
+└── preview.png
+```
+
+```md
+![Gameplay](assets/preview.png)
+```
+
+---
+
+## ✨ Features
+
+* Retro Pac-Man visual style
+* Smooth tile-locked movement system
+* Animated Pac-Man mouth
+* Four unique ghosts:
+
+  * Blinky
+  * Pinky
+  * Inky
+  * Clyde
+* Power Pellets
+* Particle effects
+* Procedural retro sound effects (no external audio files required)
+* Pause system
+* Win / Game Over screen
+* High Score tracking
+* State Machine game flow
+* Scanline arcade effect
+
+---
+
+## 🧠 OOP Concepts Implemented
+
+This project intentionally demonstrates multiple Object-Oriented Programming concepts.
+
+### 1. Class and Object
+
+Examples:
+
+* `PacMan`
+* `Ghost`
+* `GameEngine`
+* `Renderer`
+* `ScoreManager`
+
+---
+
+### 2. Inheritance
+
+```python
+class Ghost(Entity):
+    ...
+
+class Blinky(Ghost):
+    ...
+
+class Pinky(Ghost):
+    ...
+```
+
+All ghost types inherit from the base `Ghost` class.
+
+---
+
+### 3. Abstract Base Class (ABC)
+
+```python
+class Entity(ABC):
+```
+
+The `Entity` class defines common behavior for all movable game objects.
+
+---
+
+### 4. Polymorphism
+
+Each ghost implements its own targeting behavior:
+
+```python
+def get_target(self, pacman):
+```
+
+Examples:
+
+* Blinky → directly chases Pac-Man
+* Pinky → predicts movement
+* Inky → semi-random targeting
+* Clyde → alternates between chase and retreat
+
+---
+
+### 5. Class Attribute & Decorator
+
+Class attributes:
+
+```python
+CELL_SIZE
+FPS
+LIVES
+```
+
+Property decorators:
+
+```python
+@property
+def pixel_x(self):
+```
+
+---
+
+### 6. NamedTuple
+
+```python
+Position = namedtuple(...)
+Color = namedtuple(...)
+```
+
+Used to represent positions and RGB colors.
+
+---
+
+### 7. Design Pattern
+
+#### Singleton Pattern
+
+```python
+class GameConfig
+```
+
+Ensures only one configuration instance exists.
+
+#### Observer Pattern
+
+```python
+EventBus
+```
+
+Used for communication between game systems:
+
+* score updates
+* life loss
+* level progression
+* pellet effects
+
+---
+
+## 🎵 Sound System
+
+This game generates arcade-style sound effects programmatically.
+
+Included effects:
+
+* Waka-Waka
+* Power Pellet
+* Ghost Eaten
+* Death
+* Game Over
+* Victory Theme
+* Dynamic Siren
+
+No external sound files are required.
+
+---
+
+## 🕹 Controls
+
+| Key   | Action       |
+| ----- | ------------ |
+| W / ↑ | Move Up      |
+| S / ↓ | Move Down    |
+| A / ← | Move Left    |
+| D / → | Move Right   |
+| P     | Pause        |
+| ESC   | Back to Menu |
+| Q     | Quit         |
+
+---
+
+## 🏗 Project Architecture
+
+```text
+GameEngine
+│
+├── Renderer
+├── SFXEngine
+├── ParticleSystem
+├── ScoreManager
+│
+├── PacMan
+│
+└── Ghost
+    ├── Blinky
+    ├── Pinky
+    ├── Inky
+    └── Clyde
+```
+
+---
+
+## 🚀 Installation
+
+### Clone Repository
+
+```bash
+git clone https://github.com/your-username/pacman-oop.git
+cd pacman-oop
+```
+
+### Install Dependencies
+
+```bash
 pip install pygame
-3. Jalankan game:
+```
+
+### Run Game
+
+```bash
 python pacman_oop.py
-🎮 Kontrol Game
-● Gerak: Tombol Panah (Arrow Keys) / W, A, S, D
-● Pause: P
-● Kembali ke Menu: ESC
-● Keluar: Q
+```
+
+---
+
+## 🎯 Learning Objectives
+
+This project was created to:
+
+* Practice Object-Oriented Programming
+* Implement Design Patterns in Python
+* Understand game loops and state machines
+* Learn collision handling using tile-based movement
+* Explore procedural sound generation
+* Build a complete interactive application using Pygame
+
+---
+
+## 📚 Technologies Used
+
+* Python 3
+* Pygame
+* Object-Oriented Programming
+* Design Patterns
+* Procedural Audio Generation
+
+---
+
+## 👨‍💻 Author
+
+Developed as an Object-Oriented Programming project inspired by the classic Pac-Man arcade game.
+
+---
+
+## 📄 License
+
+This project is intended for educational and learning purposes.
