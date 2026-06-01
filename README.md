@@ -8,21 +8,6 @@ A retro-style Pac-Man game built with **Python** and **Pygame**, designed to dem
 
 ---
 
-## 🎮 Preview
-
-> Add your gameplay screenshot here
-
-```text
-assets/
-└── preview.png
-```
-
-```md
-![Gameplay](assets/preview.png)
-```
-
----
-
 ## ✨ Features
 
 * Retro Pac-Man visual style
